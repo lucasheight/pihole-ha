@@ -1,4 +1,4 @@
-# pihole-ha
+# pihole-ha: Pi-hole high availability (HA)
 
 Automatic DNS failover for Pi-hole across two (or more) Docker hosts using
 keepalived/VRRP. One floating VIP; point your DHCP server (or clients) at the
