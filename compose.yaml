@@ -1,0 +1,27 @@
+services:
+  keepalived:
+    image: ${KEEPALIVED_IMAGE:-ghcr.io/lucasheight/pihole-ha-keepalived}:${KEEPALIVED_TAG:-latest}
+    network_mode: host
+    cap_add: [NET_ADMIN, NET_BROADCAST, NET_RAW]
+    restart: unless-stopped
+    environment:
+      VIP: ${VIP}
+      INTERFACE: ${INTERFACE}
+      SRC_IP: ${SRC_IP}
+      PEER_IPS: ${PEER_IPS}
+      AUTH_PASS: ${AUTH_PASS}
+      STATE: ${STATE:-BACKUP}
+      PRIORITY: ${PRIORITY:-100}
+      ROUTER_ID: ${ROUTER_ID:-53}
+      CHECK_NAME: ${CHECK_NAME:-pi.hole}
+
+  # Run on ONE node only: docker compose --profile sync ...
+  nebula-sync:
+    image: ghcr.io/lovelaze/nebula-sync:${NEBULA_TAG:-latest}
+    profiles: [sync]
+    restart: unless-stopped
+    environment:
+      PRIMARY: ${SYNC_PRIMARY}
+      REPLICAS: ${SYNC_REPLICAS}
+      FULL_SYNC: ${SYNC_FULL:-true}
+      CRON: ${SYNC_CRON:-*/30 * * * *}
