@@ -24,4 +24,4 @@ services:
       PRIMARY: ${SYNC_PRIMARY}
       REPLICAS: ${SYNC_REPLICAS}
       FULL_SYNC: ${SYNC_FULL:-true}
-      CRON: ${SYNC_CRON:-*/30 * * * *}
+      CRON: ${SYNC_CRON:-0 * * * *}
