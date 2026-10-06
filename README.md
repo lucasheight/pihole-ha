@@ -22,6 +22,20 @@ Sync is one-way primary -> replicas. Make edits on the primary only. It targets
 the nodes' own IPs, not the VIP, so it works whichever node holds the VIP.
 Keep `SYNC_*` out of the other node's env file.
 
+### Sync credentials
+Nebula-sync logs in to each Pi-hole's API on every run, using the
+`url|password` pairs in `SYNC_PRIMARY` / `SYNC_REPLICAS`.
+- Pi-hole v6 only. Use an **app password** (Settings > Web interface / API >
+  Configure app password) rather than your admin password. It works with 2FA
+  enabled and can be revoked without changing the admin login.
+- Each node needs its own entry; passwords can differ between nodes.
+- The password is stored in plaintext in `nodes/<node>.env` (gitignored), so
+  `chmod 600` it and never commit it.
+- Avoid `|` in the password (it's the separator). Wrap values containing `$`
+  in single quotes, or compose will try to interpolate them.
+- Nebula-sync needs the Pi-hole web port reachable from the sync node. Use the
+  nodes' own IPs, not the VIP.
+
 For UI-based Docker managers (TrueNAS, Portainer, Unraid, etc.), paste
 `compose.yaml` with the values inlined.
 
