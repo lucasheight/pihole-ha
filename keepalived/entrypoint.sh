@@ -2,7 +2,7 @@
 set -eu
 
 : "${VIP:?VIP required, e.g. 192.168.1.53/24}"
-: "${INTERFACE:?INTERFACE required, e.g. br0}"
+: "${INTERFACE:?INTERFACE required, e.g. eth0}"
 : "${SRC_IP:?SRC_IP required (this node)}"
 : "${PEER_IPS:?PEER_IPS required, comma-separated}"
 : "${AUTH_PASS:?AUTH_PASS required}"
