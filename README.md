@@ -52,6 +52,8 @@ For UI-based Docker managers (TrueNAS, Portainer, Unraid, etc.), paste
 - `VIP` prefix length must match the LAN (e.g. /24).
 - Both nodes start `BACKUP`; priority picks the master. node1 reclaims the VIP
   when it recovers (brief blip); add `nopreempt` in the entrypoint to disable.
+- Nodes must have **different** `PRIORITY` values (examples: 150 and 100). With
+  a tie, the higher IP wins and the primary never reclaims the VIP.
 - If your router advertises IPv6 DNS (RDNSS), clients may bypass the VIP.
 - Deploy a pinned tag (`KEEPALIVED_TAG=v1.0.0` or `sha-...`), not `latest`.
   Forks: set `KEEPALIVED_IMAGE` to your own ghcr path.
