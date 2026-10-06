@@ -25,3 +25,4 @@ services:
       REPLICAS: ${SYNC_REPLICAS}
       FULL_SYNC: ${SYNC_FULL:-true}
       CRON: ${SYNC_CRON:-0 * * * *}
+      RUN_GRAVITY: ${SYNC_RUN_GRAVITY:-true}
